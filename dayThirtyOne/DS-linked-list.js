@@ -43,7 +43,7 @@ class SinglyLinkedList {
     }
     return current;
   }
-  // Insert at the beggining
+  // Remove from the beggining
   shift() {
     if (!this.head) return undefined;
     var oldHead = this.head;
@@ -54,11 +54,47 @@ class SinglyLinkedList {
     }
     return oldHead;
   }
+  // Insert at the beginning
+  unshift(val) {
+    var newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  // Get element from a given index position
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    var counter = 0;
+    var current = this.head;
+    while (counter !== index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+  // Set value on given index
+  set(index, val) {
+    var foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 // let list = new SinglyLinkedList();
+// list.push("Jesus");
 // list.push("hello");
+// list.push("Jesus");
 // list.push("there");
 // list.push("Jesus");
-// console.log(list.pop());
-// console.log(list);
+// console.log(list.set(4, "hola"));
+// console.log(list.get(4));
+// console.log(list.get(5));
