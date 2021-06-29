@@ -87,14 +87,28 @@ class SinglyLinkedList {
     }
     return false;
   }
+  // Insert into a given index
+  insert(index, val) {
+      if(index < 0 || index > this.length) return false;
+      if(index === this.length) return !!this.push(val);
+      if(index === 0) return !!this.unshift(val);
+
+      var newNode = new Node(val);
+      var prev = this.get(index - 1);
+      var temp = prev.next;
+      prev.next = newNode;
+      newNode.next = temp;
+      this.length++;
+      return true;
+  }
 }
 
-// let list = new SinglyLinkedList();
-// list.push("Jesus");
-// list.push("hello");
-// list.push("Jesus");
-// list.push("there");
-// list.push("Jesus");
+let list = new SinglyLinkedList();
+list.push("Jesus");
+list.push("hello");
+list.push("Jesus");
+list.push("there");
+list.push("Jesus");
 // console.log(list.set(4, "hola"));
-// console.log(list.get(4));
-// console.log(list.get(5));
+console.log(list.insert(3, 5));
+console.log(list.get(3));
